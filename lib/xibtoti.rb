@@ -1,6 +1,6 @@
-require 'nodes'
-require 'converters'
+$LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'session'
+require 'optparse'
 
 def inline_js_for(data)
   case data
@@ -27,15 +27,41 @@ end
 def js_comments_for text
   text.map {|line| line.chomp.empty? ? line : "// #{line}"}.join + "\n"
 end
+  
+OptionParser.new do |opts|
+  opts.banner = "Usage: xibtoti.rb [options] filename"
+  
+  opts.on("-w", "--[no-]warnings", "Show warnings") do |w|
+    @show_warnings = w
+  end
 
-ARGV.each do |file|
-  session = Session.new 'config.rb'
-  session.parse_file file
-  if session.has_errors?
-    puts "Aborted!"
-    puts session.full_log [:error]
+  opts.on("-o", "--output-file name", "Specify output file") do |o|
+    @output_file = o
+  end
+  
+  opts.on("-c", "--config-file name", "Specify config file") do |o|
+    @config_file = o
+  end
+  
+end.parse!
+
+input_file = ARGV.first
+session = Session.new @config_file || File.join(File.dirname(__FILE__), 'config.rb')
+session.parse_file input_file
+if session.has_errors?
+  puts "Aborted!"
+  puts session.full_log [:error]
+else  
+  severities = []
+  severities.unshift :warning if @show_warnings
+  log = session.full_log severities
+  script = js_comments_for(log) + js_for(session.out)
+  if @output_file
+    File.open(@output_file, 'w') do |file|
+      file.write script
+    end
+    puts log
   else
-    puts js_comments_for(session.full_log)
-    puts js_for(session.out) unless session.has_errors?
+    puts script
   end
 end

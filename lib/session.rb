@@ -1,3 +1,6 @@
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+require 'nodes'
+require 'converters'
 require 'rubygems'
 require 'plist'
 
