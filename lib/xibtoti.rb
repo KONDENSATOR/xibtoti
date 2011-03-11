@@ -30,8 +30,9 @@ def js_comments_for text
   text.map {|line| line.chomp.empty? ? line : "// #{line}"}.join + "\n"
 end
   
+usage = "Usage: xibtoti.rb [options] filename"
 OptionParser.new do |opts|
-  opts.banner = "Usage: xibtoti.rb [options] filename"
+  opts.banner = usage
   
   opts.on("-w", "--[no-]warnings", "Show warnings") do |w|
     @show_warnings = w
@@ -47,23 +48,27 @@ OptionParser.new do |opts|
   
 end.parse!
 
-input_file = ARGV.first
-session = Session.new @config_file || File.join(File.dirname(__FILE__), 'config.rb')
-session.parse_file input_file
-if session.has_errors?
-  puts "Aborted!"
-  puts session.full_log [:error]
-else  
-  severities = []
-  severities.unshift :warning if @show_warnings
-  log = session.full_log severities
-  script = js_comments_for(log) + js_for(session.out)
-  if @output_file
-    File.open(@output_file, 'w') do |file|
-      file.write script
+if ARGV.size == 1
+  input_file = ARGV.first
+  session = Session.new @config_file || File.join(File.dirname(__FILE__), 'config.rb')
+  session.parse_file input_file
+  if session.has_errors?
+    puts "Aborted!"
+    puts session.full_log [:error]
+  else  
+    severities = []
+    severities.unshift :warning if @show_warnings
+    log = session.full_log severities
+    script = js_comments_for(log) + js_for(session.out)
+    if @output_file
+      File.open(@output_file, 'w') do |file|
+        file.write script
+      end
+      puts log
+    else
+      puts script
     end
-    puts log
-  else
-    puts script
   end
+else
+  puts "For help, type: xibtoti.rb -h"
 end
