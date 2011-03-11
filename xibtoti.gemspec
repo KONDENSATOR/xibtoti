@@ -2,17 +2,17 @@
 
 Gem::Specification.new do |s|
   s.name = %q{xibtoti}
-  s.version = "0.1.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 1.2") if s.respond_to? :required_rubygems_version=
   s.authors = ["Fredrik Andersson"]
   s.date = %q{2011-03-11}
   s.description = %q{Convert iPhone xib-files to Titanium javascript.}
   s.email = %q{fredrik@kondensator.se}
-  s.extra_rdoc_files = ["LICENSE", "README", "README.rdoc", "lib/config.rb", "lib/converters.rb", "lib/nodes.rb", "lib/session.rb", "lib/xibtoti.rb"]
-  s.files = ["Changelog", "LICENSE", "OLDxibtoti.gemspec", "README", "README.rdoc", "Rakefile", "lib/config.rb", "lib/converters.rb", "lib/nodes.rb", "lib/session.rb", "lib/xibtoti.rb", "Manifest", "xibtoti.gemspec"]
+  s.extra_rdoc_files = ["CHANGELOG", "LICENSE", "README.rdoc", "lib/config.rb", "lib/converters.rb", "lib/nodes.rb", "lib/session.rb", "lib/xibtoti.rb"]
+  s.files = ["CHANGELOG", "LICENSE", "README.rdoc", "Rakefile", "lib/config.rb", "lib/converters.rb", "lib/nodes.rb", "lib/session.rb", "lib/xibtoti.rb", "Manifest", "xibtoti.gemspec"]
   s.homepage = %q{http://github.com/KONDENSATOR/xibtoti}
-  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Xibtoti", "--main", "README"]
+  s.rdoc_options = ["--line-numbers", "--inline-source", "--title", "Xibtoti", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
   s.rubyforge_project = %q{xibtoti}
   s.rubygems_version = %q{1.3.7}
