@@ -11,7 +11,7 @@ classes 'IBUIWindow' => 'Window',
 
 # Available types: 
 # val(:output)
-# bool(:output) # Where '0'=> {:output => false}, '1'=>{:output => true}
+# bool(:output) # Where '0' gives {:output => false} and '1' gives {:output => true}
 # lookup(:output, {'yes' => true, 'no' => false})
 # color(:output)
 # font(:output)
