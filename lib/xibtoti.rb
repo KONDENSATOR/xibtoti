@@ -1,6 +1,5 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'session'
-require 'optparse'
 
 def inline_js_for(data)
   case data

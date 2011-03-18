@@ -1,0 +1,59 @@
+= XibToTi
+
+== Installation
+
+To install XibToTi:
+
+  gem install xibtoti
+
+== Examples
+
+To convert a xib file to standard output write:
+
+  xibtoti myxib.xib
+
+To save the result as myxib.js:
+
+  xibtoti -o myxib.js myxib.xib
+
+To explicitly output all warnings, use the flag -w. To provide your own config file write:
+
+  xibtoti -c myconfig.rb myxib.xib
+
+== Config file
+
+In the config file information on how to translate the properties from the xib file to the Titanium script is provided. The examples given below are from the default config file.
+
+=== Ignoring warnings
+To ignore warnings for skipped classes in the xib file hierarchy:
+
+  ignore_properties 'contentStretch', 'simulatedStatusBarMetrics', 'simulatedOrientationMetrics'
+
+To ignore warnings for skipped properties in the xib file hierarchy:
+
+  ignore_classes 'IBProxyObject'
+ 
+=== Translating classes
+
+To provide information on how to translate classes in the xib file:
+
+  classes 'IBUIWindow' => 'Window',
+          'IBUIView' => 'View',
+          'IBUILabel' => 'Label',  
+          'IBUIButton' => 'Button'
+
+To give a custom javascript creation call for in example 'View', which will have standard creation call Ti.UI.createView simply give an array: 'IBUIView' => ['View', 'myCreateViewCall]
+
+=== Translating properties
+
+To provide information on how to translate properties in the xib file:
+
+  properties 'backgroundColor' => color(:backgroundColor),
+             'font' => font(:font),
+             'frameOrigin' => vector(:top, :bottom),
+             'frameSize' => vector(:height, :width),
+             'text' => val(:text),
+             'textColor' => color(:color)
+
+This example will take the xib property 'backgroundColor' and convert it into a color ('#rrggbb') in the  :backgroundColor javascript property. 'font' will be converted into a font in the :font javascript property.
+The property frameOrigin is on the form '{xx, yy}' and will bi split into the following javascript properties: :top => xx, :bottom => yy. The xib property 'text' will simply be carried over to the javascript property :text. 
