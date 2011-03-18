@@ -56,4 +56,4 @@ To provide information on how to translate properties in the xib file:
              'textColor' => color(:color)
 
 This example will take the xib property 'backgroundColor' and convert it into a color ('#rrggbb') in the  :backgroundColor javascript property. 'font' will be converted into a font in the :font javascript property.
-The property frameOrigin is on the form '{xx, yy}' and will bi split into the following javascript properties: :top => xx, :bottom => yy. The xib property 'text' will simply be carried over to the javascript property :text. 
+The property frameOrigin is on the form '{xx, yy}' and will be split into the following javascript properties: :top => xx, :bottom => yy. The xib property 'text' will simply be carried over to the javascript property :text. 
