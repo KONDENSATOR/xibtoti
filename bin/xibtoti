@@ -2,6 +2,7 @@
 
 $LOAD_PATH.unshift("#{File.dirname(__FILE__)}/../lib")
 require 'xibtoti'
+require 'optparse'
   
 OptionParser.new do |opts|
   opts.banner = "Usage: xibtoti [options] filename"

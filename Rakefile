@@ -2,7 +2,7 @@ require 'rubygems'
 require 'rake'
 require 'echoe'
 
-Echoe.new('xibtoti', '0.0.1') do |p|
+Echoe.new('xibtoti', '0.0.2') do |p|
   p.description    = "Convert iPhone xib-files to Titanium javascript."
   p.url            = "http://github.com/KONDENSATOR/xibtoti"
   p.author         = "Fredrik Andersson"
